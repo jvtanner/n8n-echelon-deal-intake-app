@@ -3,63 +3,63 @@
 import { useState, FormEvent } from 'react';
 
 const PRODUCTS = [
-  { id: 'feasibility', label: 'Feasibility Assessment' },
-  { id: 'culturePpt', label: 'Culture Deck (PPT)' },
-  { id: 'culture doc', label: 'Culture Document' },
+  { id: 'feasibility', label: 'Feasibility Assessment', price: '$999' },
+  { id: 'culturePpt', label: 'Culture Deck (PPT)', price: '$399' },
+  { id: 'culture doc', label: 'Culture Document', price: '$99' },
 ] as const;
 
 type ProductId = (typeof PRODUCTS)[number]['id'];
 
-const QUESTIONS: { key: string; label: string; placeholder: string }[] = [
+const QUESTIONS: { key: string; label: string; description: string }[] = [
   {
     key: 'Q1: Integration end state',
     label: 'Q1 — Integration End State',
-    placeholder: 'Describe the intended end state of the combined organisation post-integration. What does success look like operationally, culturally, and strategically?',
+    description: 'Describe the intended end state of the combined organisation post-integration. What does success look like operationally, culturally, and strategically?',
   },
   {
     key: 'Q2: Operational control level',
     label: 'Q2 — Operational Control Level',
-    placeholder: 'How much operational control does the acquirer intend to exert over the target? Full consolidation, light-touch oversight, or something in between?',
+    description: 'How much operational control does the acquirer intend to exert over the target? Full consolidation, light-touch oversight, or something in between?',
   },
   {
     key: 'Q3: Transaction structure',
     label: 'Q3 — Transaction Structure',
-    placeholder: 'Describe the transaction structure — asset purchase, stock purchase, merger, carve-out, etc. — and any relevant deal mechanics that affect integration scope.',
+    description: 'Describe the transaction structure — asset purchase, stock purchase, merger, carve-out, etc. — and any relevant deal mechanics that affect integration scope.',
   },
   {
     key: 'Q4: Integration timeline',
     label: 'Q4 — Integration Timeline',
-    placeholder: 'What is the target timeline for integration milestones? Note any hard deadlines driven by regulatory, contractual, or board commitments.',
+    description: 'What is the target timeline for integration milestones? Note any hard deadlines driven by regulatory, contractual, or board commitments.',
   },
   {
     key: 'Q5: Synergy targets',
     label: 'Q5 — Synergy Targets',
-    placeholder: 'What are the committed synergy targets (revenue, cost, or both)? Over what time horizon are they expected to be realised?',
+    description: 'What are the committed synergy targets (revenue, cost, or both)? Over what time horizon are they expected to be realised?',
   },
   {
     key: 'Q6: Value drivers',
     label: 'Q6 — Value Drivers',
-    placeholder: 'What are the primary value drivers behind this transaction? What capabilities, markets, or assets were the strategic rationale for the acquisition?',
+    description: 'What are the primary value drivers behind this transaction? What capabilities, markets, or assets were the strategic rationale for the acquisition?',
   },
   {
     key: 'Q7: Dedicated integration resources',
     label: 'Q7 — Dedicated Integration Resources',
-    placeholder: 'Has a dedicated integration management office (IMO) or integration team been established? What internal resources are committed to the programme?',
+    description: 'Has a dedicated integration management office (IMO) or integration team been established? What internal resources are committed to the programme?',
   },
   {
     key: 'Q8: Concurrent integrations/change',
     label: 'Q8 — Concurrent Integrations / Change',
-    placeholder: 'Is the acquirer managing any other concurrent integrations, transformations, or significant organisational change programmes that could compete for resources or leadership attention?',
+    description: 'Is the acquirer managing any other concurrent integrations, transformations, or significant organisational change programmes that could compete for resources or leadership attention?',
   },
   {
     key: 'Q9: Wider acquirer change triggered',
     label: 'Q9 — Wider Acquirer Change Triggered',
-    placeholder: 'Does this transaction trigger broader change within the acquiring organisation — restructuring, rebranding, leadership changes, or operating model shifts?',
+    description: 'Does this transaction trigger broader change within the acquiring organisation — restructuring, rebranding, leadership changes, or operating model shifts?',
   },
   {
     key: 'Q10: Carve-out functions/TSAs',
     label: 'Q10 — Carve-Out Functions / TSAs',
-    placeholder: 'Are there any functions being carved out, or transition service agreements (TSAs) in place? Identify scope, duration, and any interdependencies with integration workstreams.',
+    description: 'Are there any functions being carved out, or transition service agreements (TSAs) in place? Identify scope, duration, and any interdependencies with integration workstreams.',
   },
 ];
 
@@ -205,9 +205,10 @@ export default function Page() {
                 />
               </Field>
 
-              <Field label="Email" hint="Optional — for notifications">
+              <Field label="Email" required>
                 <input
                   type="email"
+                  required
                   placeholder="you@firm.com"
                   value={form.email}
                   onChange={(e) => setField('email', e.target.value)}
@@ -273,7 +274,10 @@ export default function Page() {
                           </svg>
                         )}
                       </span>
-                      {p.label}
+                      <span className="flex flex-col items-start gap-0.5">
+                        <span>{p.label}</span>
+                        <span className={`text-xs font-normal ${active ? 'text-[#c9a84c]/70' : 'text-[#4a4a5a]'}`}>{p.price}</span>
+                      </span>
                     </span>
                   </button>
                 );
@@ -293,11 +297,10 @@ export default function Page() {
 
             <div className="space-y-8">
               {QUESTIONS.map((q) => (
-                <Field key={q.key} label={q.label} required>
+                <Field key={q.key} label={q.label} required description={q.description}>
                   <textarea
                     required
                     rows={4}
-                    placeholder={q.placeholder}
                     value={form.answers[q.key]}
                     onChange={(e) => setAnswer(q.key, e.target.value)}
                     className={`${inputClass} resize-none leading-relaxed`}
@@ -360,11 +363,13 @@ function Field({
   label,
   required,
   hint,
+  description,
   children,
 }: {
   label: string;
   required?: boolean;
   hint?: string;
+  description?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -374,6 +379,9 @@ function Field({
         {required && <span className="text-[#c9a84c] ml-0.5"> *</span>}
         {hint && <span className="text-[#5a5a6a] text-xs ml-2">{hint}</span>}
       </label>
+      {description && (
+        <p className="text-xs text-[#5a5a6a] leading-relaxed">{description}</p>
+      )}
       {children}
     </div>
   );
