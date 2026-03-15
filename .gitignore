@@ -37,3 +37,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# n8n workflow exports (contain proprietary prompts — never commit)
+*.workflow.json
+n8n-export/
+workflows/
