@@ -150,14 +150,14 @@ export default function Page() {
           </div>
           <div className="space-y-3">
             <h2 className="text-2xl font-light text-[#e8e6e0] tracking-wide">Deal Submitted</h2>
-            <p className="text-[#8a8a9a] leading-relaxed">
+            <p className="text-[#e8e6e0] leading-relaxed">
               Your deal has been submitted. You&apos;ll receive a notification when the analysis is ready.
             </p>
           </div>
           <div className="pt-2">
             <div className="h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent" />
           </div>
-          <p className="text-xs text-[#5a5a6a] uppercase tracking-widest">Echelon M&A Advisory</p>
+          <p className="text-xs text-[#9a9aaa] uppercase tracking-widest">Echelon M&A Advisory</p>
         </div>
       </div>
     );
@@ -172,7 +172,7 @@ export default function Page() {
             <div className="w-1 h-6 bg-[#c9a84c] rounded-full" />
             <span className="text-sm font-medium tracking-[0.2em] uppercase text-[#e8e6e0]">Echelon</span>
           </div>
-          <span className="text-xs text-[#5a5a6a] tracking-widest uppercase">Deal Intake</span>
+          <span className="text-xs text-[#9a9aaa] tracking-widest uppercase">Deal Intake</span>
         </div>
       </header>
 
@@ -182,7 +182,7 @@ export default function Page() {
           <h1 className="text-3xl font-light text-[#e8e6e0] tracking-wide">
             Integration Assessment
           </h1>
-          <p className="text-[#6a6a7a] leading-relaxed text-sm max-w-xl">
+          <p className="text-[#e8e6e0] leading-relaxed text-base max-w-xl">
             Complete the questionnaire below to initiate your deal analysis. Detailed responses enable a more precise assessment of integration complexity, cultural alignment, and delivery risk.
           </p>
         </div>
@@ -247,7 +247,7 @@ export default function Page() {
           <section className="space-y-6">
             <div className="space-y-1">
               <SectionLabel>Products Requested</SectionLabel>
-              <p className="text-xs text-[#5a5a6a]">Select all deliverables required for this engagement.</p>
+              <p className="text-base text-[#e8e6e0]">Select all deliverables required for this engagement.</p>
             </div>
 
             <div className="flex flex-wrap gap-3">
@@ -261,7 +261,7 @@ export default function Page() {
                     className={`px-4 py-2.5 rounded text-sm font-medium transition-all duration-150 border ${
                       active
                         ? 'bg-[#c9a84c]/15 border-[#c9a84c]/60 text-[#c9a84c]'
-                        : 'bg-[#111625] border-[#1e2438] text-[#6a6a7a] hover:border-[#2e3858] hover:text-[#9a9aaa]'
+                        : 'bg-[#111625] border-[#1e2438] text-[#9a9aaa] hover:border-[#2e3858] hover:text-[#e8e6e0]'
                     }`}
                   >
                     <span className="flex items-center gap-2">
@@ -276,7 +276,7 @@ export default function Page() {
                       </span>
                       <span className="flex flex-col items-start gap-0.5">
                         <span>{p.label}</span>
-                        <span className={`text-xs font-normal ${active ? 'text-[#c9a84c]/70' : 'text-[#4a4a5a]'}`}>{p.price}</span>
+                        <span className={`text-xs font-normal ${active ? 'text-[#c9a84c]/70' : 'text-[#7a7a8a]'}`}>{p.price}</span>
                       </span>
                     </span>
                   </button>
@@ -292,7 +292,7 @@ export default function Page() {
           <section className="space-y-8">
             <div className="space-y-1">
               <SectionLabel>Integration Assessment</SectionLabel>
-              <p className="text-xs text-[#5a5a6a]">Answer each question with as much detail as available. These responses directly inform the quality of the analysis.</p>
+              <p className="text-base text-[#e8e6e0]">Answer each question with as much detail as available. These responses directly inform the quality of the analysis.</p>
             </div>
 
             <div className="space-y-8">
@@ -319,7 +319,7 @@ export default function Page() {
             )}
 
             <div className="flex items-center justify-between gap-4">
-              <p className="text-xs text-[#5a5a6a]">
+              <p className="text-base text-[#e8e6e0]">
                 All fields marked with * are required.
               </p>
               <button
@@ -344,7 +344,7 @@ export default function Page() {
       {/* Footer */}
       <footer className="border-t border-[#1e2438] px-6 py-5">
         <div className="max-w-2xl mx-auto">
-          <p className="text-xs text-[#3a3a4a] text-center tracking-widest uppercase">Echelon M&A Advisory · Confidential</p>
+          <p className="text-xs text-[#6a6a7a] text-center tracking-widest uppercase">Echelon M&A Advisory · Confidential</p>
         </div>
       </footer>
     </div>
@@ -353,7 +353,7 @@ export default function Page() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c9a84c]">
+    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a84c]">
       {children}
     </p>
   );
@@ -374,13 +374,13 @@ function Field({
 }) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm text-[#9a9aaa]">
+      <label className="block text-base text-[#ffffff]">
         {label}
         {required && <span className="text-[#c9a84c] ml-0.5"> *</span>}
-        {hint && <span className="text-[#5a5a6a] text-xs ml-2">{hint}</span>}
+        {hint && <span className="text-[#e8e6e0] text-sm ml-2">{hint}</span>}
       </label>
       {description && (
-        <p className="text-xs text-[#5a5a6a] leading-relaxed">{description}</p>
+        <p className="text-base text-[#e8e6e0] leading-relaxed">{description}</p>
       )}
       {children}
     </div>
